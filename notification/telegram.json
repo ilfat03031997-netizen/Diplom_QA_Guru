@@ -1,0 +1,27 @@
+{
+  "base": {
+    "logo": "",
+    "project": "JS QA",
+    "environment": "some env",
+    "comment": "some comment",
+    "reportLink": "",
+    "language": "ru",
+    "allureFolder": "allure-report",
+    "enableChart": true,
+    "chart": {
+       "mode": "pie"
+    },
+    "links": {
+       "report": "${REPORT_URL}",
+       "build": "${BUILD_URL}"
+    },
+    "enableSuitesPublishing": false,
+    "customData": {}
+  },
+  "telegram": {
+    "token": "${TELEGRAM_BOT_TOKEN}",
+    "chat": "${TELEGRAM_CHAT_ID}",
+    "replyTo": ""
+  }
+
+}

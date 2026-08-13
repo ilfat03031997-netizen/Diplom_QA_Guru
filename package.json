@@ -1,0 +1,33 @@
+{
+  "name": "homeworkpageobject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "npx playwright codegen",
+    "test": "npx playwright test",
+    "code": "npx playwright codegen",
+    "report": "npx playwright show-report",
+    "ui": "npx playwright test --ui",
+    "allureG": "npx allure generate",
+    "allureO": "npx allure open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.3",
+    "allure-playwright": "^3.10.2",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.8.0",
+    "globals": "^17.9.0"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.6"
+  }
+}

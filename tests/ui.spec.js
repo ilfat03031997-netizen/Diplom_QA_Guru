@@ -1,0 +1,126 @@
+import { test } from '../src/helpers/fixtures/index';
+import { expect } from '@playwright/test';
+import { UserBuilder, EditArticleBuilder, ArticleBuilder, CommentBuilder, EditUserBuilder } from '../src/helpers/builders';
+
+
+test.describe('Авторизация', () => {
+  let testUser;
+  let testArticle;
+  let testComment;
+  let EditArt;
+  let testEditUser;
+
+  // Предусловие
+  test.beforeEach(async ({ app }) => {
+    //создаем объект юзера
+    testUser = new UserBuilder().withEmail().withPassword().withUsername().build();
+    //генерируем поля для статьи
+    testArticle = new ArticleBuilder().ArTitle().ArticleAbout().YourArticle().Entertags().build();
+    //генерируем поле для коммента
+    testComment = new CommentBuilder().Testcomment().build();
+    //генерируем поле для редактирования статьи
+    EditArt = new EditArticleBuilder().EdArticle().build();
+    //генерируем поле для редактирования пользователя
+    testEditUser = new EditUserBuilder().EdUser().build();
+
+    //  Переходим на сайт и регистрируемся
+    await app.main.goto();
+    await app.main.gotoRegister();
+    await app.register.signup(testUser);
+  });
+
+  // тест 1 - Создание новой статьи
+  test('Авторизованный пользователь может создать статью', async ({ app }) => {
+    await app.page.goto('/');
+
+    //1.Авторизация пользователя
+    await app.main.gotoAuthorization();
+    await app.authorization.login(testUser);
+
+    //2.Создание статьи
+    await app.NewArticle.clickNewArticle();
+    await app.NewArticle.newArticlewrite(testArticle);
+
+    // Ожидаемый результат
+    await expect(app.newPostArticle.getInputComment()).toContainText(testArticle.title);
+  });
+
+  //тест 2 - Добавление комента к созданным статьям
+  test('Авторизованный пользователь может добавить комент к созданным статьям', async ({ app }) =>{
+    await app.page.goto('/');
+
+    //1.Авторизация пользователя
+    await app.main.gotoAuthorization();
+    await app.authorization.login(testUser);
+
+    //2.Создание статьи
+    await app.NewArticle.clickNewArticle();
+    await app.NewArticle.newArticlewrite(testArticle);
+    //3.Коментарий к новой статье
+    await app.newComment.myAllArticle();
+    await app.newComment.addComment(testComment);
+
+    // Ожидаемый результат
+    await expect(app.newComment.GetComment()).toContainText(testComment.comment);
+  });
+
+  //тест 3 - Поставить лайк новой статье
+  test('Авторизованный пользователь может поставить лайк к созданным статьям', async ({ app }) => {
+    await app.page.goto('/');
+
+    //1.Авторизация пользователя
+    await app.main.gotoAuthorization();
+    await app.authorization.login(testUser);
+
+    //2.Создание статьи
+    await app.NewArticle.clickNewArticle();
+    await app.NewArticle.newArticlewrite(testArticle);
+    await expect(app.newPostArticle.getInputComment()).toContainText(
+      testArticle.title
+    );
+
+    //3.Перейти ко всем статьям
+    await app.newComment.myAllArticle();
+    //4.Поставить лайк статье
+    await app.newLike.addLike();
+
+    // Ожидаемый результат
+    await expect(app.newLike.GetLike()).not.toContainText('0');
+  });
+
+
+  //тест 4 - редактирование статьи
+  test('Авторизованный пользователь может редактировать статью', async ({ app }) => {
+    await app.page.goto('/');
+
+    //1.Авторизация пользователя
+    await app.main.gotoAuthorization();
+    await app.authorization.login(testUser);
+
+    //2.Создание статьи
+    await app.NewArticle.clickNewArticle();
+    await app.NewArticle.newArticlewrite(testArticle);
+    await expect(app.newPostArticle.getInputComment()).toContainText(testArticle.title);
+
+    //3.Редактирование статьи
+    await app.newComment.myAllArticle();
+    await app.editArticle.EditArticle(EditArt);
+
+    // Ожидаемый результат
+    await expect(app.editArticle.GetArticleE(EditArt.EditArticle)).toContainText(EditArt.EditArticle);
+  });
+  // тест 5 - Автоизованный пользователь может редактировать свои данные
+  test('Пользователь может редактировать свои данные ', async ({ app }) => {
+    await app.page.goto('/');
+
+    // 1.авторизация пользователя
+    await app.main.gotoAuthorization();
+    await app.authorization.login(testUser);
+
+    //2.редактирование карточки пользователя
+    await app.editUser.EditSettings(testEditUser);
+
+    // Ожидаемый результат
+    await expect(app.editUser.GetBio()).toContainText(testEditUser.EditUser);
+  });
+});

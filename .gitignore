@@ -1,0 +1,28 @@
+
+# Зависимости
+node_modules/
+
+# Артефакты Playwright
+playwright-report/
+test-results/
+.playwright-browsers/
+
+allure-results
+allure-report
+
+# Окружение и секреты
+.env
+.env.local
+.env.*.local
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+.vs/
+
+.prettierignore
+
