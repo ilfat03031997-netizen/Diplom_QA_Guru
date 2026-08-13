@@ -33,10 +33,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: process.env.BACK_URL,
-    proxy: {
-      server: 'http://127.0.0.1:1080',
-    },
+    baseURL: process.env.BACK_URL
   
 
       /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
