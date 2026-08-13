@@ -1,0 +1,89 @@
+# Коммент
+name: newautotest UI/API
+# Это Название пайплаина
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+#ручной запуск 
+  workflow_dispatch: 
+
+jobs:
+  homeworkPageObject:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.4.0
+      - name: Установить пакет
+        run: npm ci
+      - name: Установить браузеры
+        run: npx playwright install --with-deps
+      - name: Setup AllureCTL
+        uses:  allure-framework/setup-allurectl@v1
+        with:
+          allure-endpoint: https://allure.qa.guru
+          allure-token: ${{ secrets.ALLURE_TOKEN }}
+          allure-project-id: ${{ vars.ALLURE_PROJECT_ID }}  
+      - name: Запустить тесты
+        run: npm t
+        env: 
+          BACK_URL_API: ${{vars.BACK_URL_API}}
+          BACK_URL: ${{vars.BACK_URL}}
+          
+        #  Загружаем результаты в Allure TestOps
+      - name: Upload results to Allure TestOps
+        if: always()
+        run: allurectl upload allure-results
+
+      - name: Get job run ID from allurectl
+        id: allure_job
+        if: always()
+        run: |
+          export $(allurectl job-run env)
+          echo "ALLURE_JOB_RUN_ID=$ALLURE_JOB_RUN_ID" >> $GITHUB_OUTPUT
+          echo "ALLURE_LAUNCH_ID=$ALLURE_LAUNCH_ID" >> $GITHUB_OUTPUT
+
+      - name: Генерируем отчет для телеграмм 
+        if: always()
+        run: npx allure-commandline generate allure-results -o allure-report --clean
+        continue-on-error: true
+        
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        continue-on-error: true
+        if: always()
+        with: 
+          name: artefacts
+          path: |
+            allure-report/index.html
+            allure-results
+            playwright-report
+            allure-report-single
+            
+      - name: Set up JDK
+        if: always()
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17' 
+      
+      - name: Отправить уведомление в Telegram
+        if: always()
+        env:
+           TELEGRAM_BOT_TOKEN: ${{secrets.TELEGRAM_BOT_TOKEN}}
+           TELEGRAM_CHAT_ID: ${{secrets.TELEGRAM_CHAT_ID}}
+           REPORT_URL: "https://allure.qa.guru/jobrun/${{ steps.allure_job.outputs.ALLURE_JOB_RUN_ID }}"
+           BUILD_URL: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        run: |
+          # Подставляем реальные значения в файл конфигурации
+          envsubst < notification/telegram.json > notification/telegram_ready.json
+          
+          # Запускаем отправку с новым файлом
+          java "-DconfigFile=notification/telegram_ready.json" -jar notification/allure-notifications-5.0.8.jar
+        
+      
