@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { Api } from './api'
+import { test } from '@playwright/test';
 
 
 
@@ -14,7 +13,7 @@ export class ChallengesService {
     // Бизнес-сценарии для эндпоинта
     async get(token) {
         return test.step('get/challenges', async () => {
-           
+
 
             let response = await this.request.get(`/challenges`, {
                 headers: {

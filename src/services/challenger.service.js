@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 
 
@@ -19,8 +19,8 @@ export class ChallengerService {
             console.log(`https://apichallenges.eviltester.com${headers.location}`)
             return headers;
         })
-        
+
     }
-   
+
 
 }

@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { Api } from './api'
+import { test } from '@playwright/test';
 
 
 
@@ -24,9 +23,9 @@ export class heartbeatService {
                 }
             });
 
-           
+
             const headers = await response.headers();
-            const statuscode = await response.status();      
+            const statuscode = await response.status();
 
             return { headers, statuscode };
         })

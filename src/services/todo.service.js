@@ -1,6 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { Api } from './api'
-
+import { test } from '@playwright/test';
 
 
 
@@ -14,7 +12,7 @@ export class TodoService {
     }
 
     // Бизнес-сценарии для эндпоинта
-    
+
 
     async get(token) {
         return test.step('get/todo', async () => {

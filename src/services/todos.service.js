@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { Api } from './api'
+import { test } from '@playwright/test';
 import { parseResponse } from '../helpers/parsers/parser.response.js';
 
 
@@ -15,7 +14,7 @@ export class TodosService {
     // Бизнес-сценарии для эндпоинта
     async post(token, todo, id) {
         return test.step('post/todos', async () => {
-            
+
 
             const url = id ? `${this.path}/${id}` : `${this.path}`;
 
@@ -25,7 +24,7 @@ export class TodosService {
                 },
                 data: todo
             });
-            
+
             const body = await response.json();
             const headers = await response.headers();
             const statuscode = await response.status();
@@ -56,7 +55,7 @@ export class TodosService {
     async getByid(token, id) {
         return test.step('getByid/todos/id', async () => {
 
-            
+
             let response = await this.request.get(`${this.path}/${id}`, {
                 headers: {
                     'x-challenger': token
@@ -68,15 +67,15 @@ export class TodosService {
 
             return { headers, body, statuscode };
 
-            
+
         })
     }
 
-    
+
     async put(token, id, todo) {
         return test.step('put/todos/id', async () => {
 
-           
+
 
             let response = await this.request.put(`${this.path}/${id}`, {
                 headers: {
@@ -125,7 +124,7 @@ export class TodosService {
                     'x-challenger': token
                 }
             });
-            
+
             const headers = await response.headers();
             const statuscode = await response.status();
 
