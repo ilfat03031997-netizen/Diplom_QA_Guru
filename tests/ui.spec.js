@@ -11,7 +11,8 @@ test.describe('Авторизация', () => {
   let testEditUser;
 
   // Предусловие
-  test.beforeEach(async ({ app }) => {
+    test.beforeEach(async ({ app }) => {
+
     //создаем объект юзера
     testUser = new UserBuilder().withEmail().withPassword().withUsername().build();
     //генерируем поля для статьи
@@ -29,15 +30,12 @@ test.describe('Авторизация', () => {
     await app.register.signup(testUser);
   });
 
-  // тест 1 - Создание новой статьи
-  test('Авторизованный пользователь может создать статью', async ({ app }) => {
-    await app.page.goto('/');
+    // тест 1 - Создание новой 
 
-    //1.Авторизация пользователя
-    await app.main.gotoAuthorization();
-    await app.authorization.login(testUser);
+    test('Авторизованный пользователь может создать статью', async ({ app }) => {
+  
 
-    //2.Создание статьи
+    //1.Создание статьи
     await app.NewArticle.clickNewArticle();
     await app.NewArticle.newArticlewrite(testArticle);
 
@@ -46,38 +44,46 @@ test.describe('Авторизация', () => {
   });
 
   //тест 2 - Добавление комента к созданным статьям
-  test('Авторизованный пользователь может добавить комент к созданным статьям', async ({ app }) =>{
-    await app.page.goto('/');
+    test('Авторизованный пользователь может добавить комент к созданным статьям', async ({ app }) => {
+ 
+   /* await app.page.goto('/');
 
     //1.Авторизация пользователя
     await app.main.gotoAuthorization();
-    await app.authorization.login(testUser);
+    await app.authorization.login(testUser);*/
 
     //2.Создание статьи
     await app.NewArticle.clickNewArticle();
     await app.NewArticle.newArticlewrite(testArticle);
+
+
+
+
     //3.Коментарий к новой статье
+    // Кликаем по заголовку созданной статьи
     await app.newComment.myAllArticle();
+    await expect(app.newPostArticle.getALlArticle()).toContainText('My Articles');
+    await app.newComment.readmore();
     await app.newComment.addComment(testComment);
 
     // Ожидаемый результат
     await expect(app.newComment.GetComment()).toContainText(testComment.comment);
+
   });
 
   //тест 3 - Поставить лайк новой статье
-  test('Авторизованный пользователь может поставить лайк к созданным статьям', async ({ app }) => {
-    await app.page.goto('/');
+    test('Авторизованный пользователь может поставить лайк к созданным статьям', async ({ app }) => {
+
+    /*await app.page.goto('/');
 
     //1.Авторизация пользователя
     await app.main.gotoAuthorization();
-    await app.authorization.login(testUser);
+    await app.authorization.login(testUser);*/
 
     //2.Создание статьи
     await app.NewArticle.clickNewArticle();
     await app.NewArticle.newArticlewrite(testArticle);
-    await expect(app.newPostArticle.getInputComment()).toContainText(
-      testArticle.title
-    );
+    await expect(app.newPostArticle.getInputComment()).toContainText(testArticle.title);
 
     //3.Перейти ко всем статьям
     await app.newComment.myAllArticle();
@@ -88,9 +94,9 @@ test.describe('Авторизация', () => {
     await expect(app.newLike.GetLike()).not.toContainText('0');
   });
 
-
   //тест 4 - редактирование статьи
-  test('Авторизованный пользователь может редактировать статью', async ({ app }) => {
+    test('Авторизованный пользователь может редактировать статью', async ({ app }) => {
+
     await app.page.goto('/');
 
     //1.Авторизация пользователя
@@ -108,9 +114,11 @@ test.describe('Авторизация', () => {
 
     // Ожидаемый результат
     await expect(app.editArticle.GetArticleE(EditArt.EditArticle)).toContainText(EditArt.EditArticle);
-  });
+    });
+
   // тест 5 - Автоизованный пользователь может редактировать свои данные
-  test('Пользователь может редактировать свои данные ', async ({ app }) => {
+    test('Пользователь может редактировать свои данные ', async ({ app }) => {
+
     await app.page.goto('/');
 
     // 1.авторизация пользователя

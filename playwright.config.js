@@ -43,7 +43,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] }
     },
-  
+
 /*
     {
       name: 'firefox',
@@ -84,4 +84,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
