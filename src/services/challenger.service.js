@@ -14,7 +14,7 @@ export class ChallengerService {
     // Бизнес-сценарии для эндпоинта
     async post(Accept) {
         return test.step('post/challenger', async () => {
-            let response = await this.request.post(`/challenger`, {
+            let response = await this.request.post(`${process.env.BACK_URL_API}/challenger`, {
                 headers: {
                     'Accept': Accept
                 }
@@ -22,7 +22,7 @@ export class ChallengerService {
             const headers = await response.headers();
             console.log(`https://apichallenges.eviltester.com${headers.location}`)
             return headers;
-        })
+        });
 
     }
 

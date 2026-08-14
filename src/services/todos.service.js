@@ -16,7 +16,7 @@ export class TodosService {
         return test.step('post/todos', async () => {
 
 
-            const url = id ? `${this.path}/${id}` : `${this.path}`;
+            const url = id ? `${process.env.BACK_URL_API}/${this.path}/${id}` : `${this.path}`;
 
             let response = await this.request.post(url, {
                 headers: {
@@ -31,7 +31,7 @@ export class TodosService {
             const statuscode = await response.status();
 
             return { headers, body, statuscode };
-        })
+        });
 
     }
 
@@ -50,7 +50,7 @@ export class TodosService {
             const statuscode = await response.status();
 
             return { headers, body, statuscode };
-        })
+        });
     }
 
     async getByid(token, id) {
@@ -69,7 +69,7 @@ export class TodosService {
             return { headers, body, statuscode };
 
 
-        })
+        });
     }
 
 
@@ -91,7 +91,7 @@ export class TodosService {
             return { headers, body, statuscode };
 
 
-        })
+        });
     }
 
 
@@ -114,7 +114,7 @@ export class TodosService {
             return { headers, body, statuscode };
 
 
-        })
+        });
     }
 
     async head(token) {
@@ -132,7 +132,7 @@ export class TodosService {
             return { headers, statuscode };
 
 
-        })
+        });
     }
 
     async getAccept(token, Accept) {
@@ -150,7 +150,7 @@ export class TodosService {
             const body = await parseResponse(response);
 
             return { headers, statuscode, body };
-        })
+        });
     }
 
     async delete(token, id) {
@@ -166,7 +166,7 @@ export class TodosService {
             const statuscode = await response.status();
 
             return { headers, statuscode };
-        })
+        });
     }
 
 
@@ -187,7 +187,7 @@ export class TodosService {
             const statuscode = await response.status();
 
             return { headers, body, statuscode };
-        })
+        });
 
     }
 
