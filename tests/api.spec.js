@@ -52,18 +52,11 @@ test.describe('Запросы с конткретным id "todo"', () => {
         expect(body.doneStatus).toEqual(todo.doneStatus);
         expect(body.description).toEqual(todo.description);
     });
-    test('17 - POST-запрос для успешного обновления списка дел по id', { tag: '@post' }, async ({ api }) => {
+    test('23 - DELETE-запрос для успешного удаления задачи', { tag: '@delete' }, async ({ api }) => {
 
-        const Accept = 'application/json';
+        ({ headers, statuscode } = await api.todos.delete(token, todo.id));
 
-        ({ body, headers, statuscode } = await api.todos.post(token, todo, Accept, todo.id ));
-
-
-        expect(statuscode).toEqual(200);
-        expect(body.id).toEqual(todo.id);
-        expect(body.title).toEqual(todo.title);
-        expect(body.doneStatus).toEqual(todo.doneStatus);
-        expect(body.description).toEqual(todo.description);
+        expect(statuscode).toEqual(204)
     });
 });
 

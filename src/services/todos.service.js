@@ -8,7 +8,7 @@ export class TodosService {
         // это браузер
         this.request = request;
         // здесь мы описываем техническую реализацию эндпоинтов
-        this.path = '/todos';
+        this.path = 'todos';
     }
 
     // Бизнес-сценарии для эндпоинта
@@ -16,9 +16,9 @@ export class TodosService {
         return test.step('post/todos', async () => {
 
 
-            const url = id ? `${process.env.BACK_URL_API}/${this.path}/${id}` : `${this.path}`;
+            const url = `${process.env.BACK_URL_API}/${this.path}`;
 
-            let response = await this.request.post(url, {
+            let response = await this.request.post(`${process.env.BACK_URL_API}/${this.path}`, {
                 headers: {
                     'x-challenger': token,
                     'Accept': Accept
