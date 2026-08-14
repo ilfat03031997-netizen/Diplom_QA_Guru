@@ -11,13 +11,14 @@ export class ChallengesService {
     }
 
     // Бизнес-сценарии для эндпоинта
-    async get(token) {
+    async get(token, Accept) {
         return test.step('get/challenges', async () => {
 
 
             let response = await this.request.get(`/challenges`, {
                 headers: {
-                    'x-challenger': token
+                    'x-challenger': token,
+                    'Accept': Accept
                 }
             });
             const body = await response.json();

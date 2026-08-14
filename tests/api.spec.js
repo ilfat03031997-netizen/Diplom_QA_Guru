@@ -56,7 +56,7 @@ test.describe('Запросы с конткретным id "todo"', () => {
 
         const Accept = 'application/json';
 
-        ({ body, headers, statuscode } = await api.todos.post(token, todo, todo.id, Accept));
+        ({ body, headers, statuscode } = await api.todos.post(token, todo, Accept, todo.id ));
 
 
         expect(statuscode).toEqual(200);

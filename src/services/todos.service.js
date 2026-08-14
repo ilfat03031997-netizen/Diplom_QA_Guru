@@ -12,7 +12,7 @@ export class TodosService {
     }
 
     // Бизнес-сценарии для эндпоинта
-    async post(token, todo, id) {
+    async post(token, todo, Accept, id) {
         return test.step('post/todos', async () => {
 
 
@@ -20,7 +20,8 @@ export class TodosService {
 
             let response = await this.request.post(url, {
                 headers: {
-                    'x-challenger': token
+                    'x-challenger': token,
+                    'Accept': Accept
                 },
                 data: todo
             });
