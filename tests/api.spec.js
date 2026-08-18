@@ -52,7 +52,7 @@ test.describe('Запросы с конткретным id "todo"', () => {
         expect(statuscode).toEqual(201);
         expect(body.id).toBeDefined();
 
-        todo.id = body.id
+        todo.id = await body.id
         expect(body.title).toEqual(todo.title);
         expect(body.doneStatus).toEqual(todo.doneStatus);
         expect(body.description).toEqual(todo.description);
@@ -99,7 +99,25 @@ test('13 - POST-запрос для создания задачи с указа�
     expect(body.description).toEqual(todo.description);
 });
 
+test('04 - получение ошибки 404 списка заданий', { tag: '@get' }, async ({ api }) => {
 
+    const Accept = '*/*';
+    ({ statuscode } = await api.todo.get(token,Accept));
+
+    expect(statuscode).toEqual(404);
+    expect(headers['x-challenger']).toEqual(token);
+});
+
+test('06 - получение списка конкретного задания, который не существует error 404', { tag: '@get' }, async ({ api }) => {
+
+    const id = 10000;
+    const Accept = 'application/json';
+
+    ({ headers, statuscode } = await api.todos.getByid(token, id, Accept));
+
+    expect(statuscode).toEqual(404);
+    expect(headers['x-challenger']).toEqual(token);
+});
 
 
 

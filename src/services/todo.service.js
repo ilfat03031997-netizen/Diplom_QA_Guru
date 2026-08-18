@@ -14,13 +14,14 @@ export class TodoService {
     // Бизнес-сценарии для эндпоинта
 
 
-    async get(token) {
+    async get(token, Accept) {
         return test.step('get/todo', async () => {
 
 
             let response = await this.request.get(`/todo`, {
                 headers: {
-                    'x-challenger': token
+                    'x-challenger': token,
+                    'Accept': Accept
                 }
             });
             const statuscode = await response.status();

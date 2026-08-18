@@ -12,7 +12,7 @@ export class TodosService {
     }
 
     // Бизнес-сценарии для эндпоинта
-    async post(token, todo, Accept, id) {
+    async post(token, todo, Accept) {
         return test.step('post/todos', async () => {
 
 
@@ -52,13 +52,14 @@ export class TodosService {
         });
     }
 
-    async getByid(token, id) {
+    async getByid(token, id, Accept) {
         return test.step('getByid/todos/id', async () => {
 
 
             let response = await this.request.get(`${this.path}/${id}`, {
                 headers: {
-                    'x-challenger': token
+                    'x-challenger': token,
+                    'Accept': Accept
                 }
             });
             const body = await response.json();
