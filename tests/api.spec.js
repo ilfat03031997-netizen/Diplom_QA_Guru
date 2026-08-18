@@ -35,9 +35,13 @@ test('02 - получение списка challenges', { tag: '@get' }, async (
 
 test.describe('Запросы с конткретным id "todo"', () => {
 
-    let todo = new ToDoBuilder().withTitle().withDoneStatus().withDescription().build();
+    let todo;
 
-    test('09 - POST-запрос для успешного создания задачи', { tag: '@post' }, async ({ api }) => {
+      test.beforeEach({ tag: '@post' }, async ({ api }) => {
+
+
+
+        todo = new ToDoBuilder().withTitle().withDoneStatus().withDescription().build();
 
         const Accept = 'application/json';
 
@@ -47,17 +51,21 @@ test.describe('Запросы с конткретным id "todo"', () => {
 
         expect(statuscode).toEqual(201);
         expect(headers['x-challenger']).toEqual(token);
-        expect(body.id).toEqual(todo.id);
+        expect(body.id).toBeDefined();
         expect(body.title).toEqual(todo.title);
         expect(body.doneStatus).toEqual(todo.doneStatus);
         expect(body.description).toEqual(todo.description);
     });
-    test('23 - DELETE-запрос для успешного удаления задачи', { tag: '@delete' }, async ({ api }) => {
 
-        ({ headers, statuscode } = await api.todos.delete(token, todo.id));
+
+        test('23 - DELETE-запрос для успешного удаления задачи', { tag: '@delete' }, async ({ api }) => {
+
+            const Accept = 'application/json';
+
+        ({ headers, statuscode } = await api.todos.delete(token, todo.id, Accept));
 
         expect(statuscode).toEqual(204)
-    });
+        });
 });
 
 

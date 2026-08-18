@@ -17,7 +17,7 @@ export class RegisterPage {
 
     // Бизнес-сценарии на страничке
     async signup(user)
-    // ({email, password, username})
+
     {
         return test.step('Ввод логопасов и майл для регистрации', async () => {
         // Деструктуризация объекта - разбираем объект на переменные

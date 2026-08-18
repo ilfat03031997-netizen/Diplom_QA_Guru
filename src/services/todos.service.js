@@ -16,7 +16,6 @@ export class TodosService {
         return test.step('post/todos', async () => {
 
 
-            const url = `${process.env.BACK_URL_API}/${this.path}`;
 
             let response = await this.request.post(`${process.env.BACK_URL_API}/${this.path}`, {
                 headers: {
@@ -153,12 +152,13 @@ export class TodosService {
         });
     }
 
-    async delete(token, id) {
+    async delete(token, id, Accept) {
         return test.step('delete/todos', async () => {
 
             let response = await this.request.delete(`${this.path}/${id}`, {
                 headers: {
-                    'X-Challenger': token
+                    'X-Challenger': token,
+                    'Accept': Accept
                 }
             });
 

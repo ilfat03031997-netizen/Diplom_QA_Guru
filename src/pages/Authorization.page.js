@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';  
+import { test } from '@playwright/test';
 
 export class AuthorizationPage {
     constructor(page) {
@@ -17,11 +17,11 @@ export class AuthorizationPage {
 
     // Бизнес-сценарии на страничке
     async login(user)
-    // ({email, password, username})
+
     {
         return test.step('Ввод логопасов для авторизации', async () => {
         // Деструктуризация объекта - разбираем объект на переменные
-        const { email, password, username } = user;
+        const { email, password } = user;
 
         await this.emailinputA.click();
         await this.emailinputA.fill(email);
