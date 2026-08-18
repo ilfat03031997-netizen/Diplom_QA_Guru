@@ -56,7 +56,7 @@ export class TodosService {
         return test.step('getByid/todos/id', async () => {
 
 
-            let response = await this.request.get(`${this.path}/${id}`, {
+            let response = await this.request.get(`${process.env.BACK_URL_API}/${this.path}/${id}`, {
                 headers: {
                     'x-challenger': token,
                     'Accept': Accept
