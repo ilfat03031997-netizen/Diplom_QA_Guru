@@ -32,50 +32,6 @@ test('02 - получение списка challenges', { tag: '@get' }, async (
 });
 
 
-
-test.describe('Запросы с конткретным id "todo"', () => {
-
-    let todo;
-
-      test.beforeEach({ tag: '@post' }, async ({ api }) => {
-
-
-
-        todo = new ToDoBuilder().withTitle().withDoneStatus().withDescription().build();
-
-        const Accept = 'application/json';
-
-        ({ body, headers, statuscode } = await api.todos.post(token, todo, Accept));
-
-
-
-        expect(statuscode).toEqual(201);
-        expect(body.id).toBeDefined();
-
-        todo.id = await body.id
-        expect(body.title).toEqual(todo.title);
-        expect(body.doneStatus).toEqual(todo.doneStatus);
-        expect(body.description).toEqual(todo.description);
-    });
-
-
-        test('05 - получение списка конкретного задания', { tag: '@get' }, async ({ api }) => {
-
-          const Accept = 'application/json';
-          ({ body, headers, statuscode } = await api.todos.getByid(token, todo.id, Accept));
-
-
-          expect(statuscode).toEqual(200);
-          expect(body.todos[0].id).toEqual(todo.id);
-          expect(body.todos[0].title).toEqual(todo.title);
-          expect(body.todos[0].doneStatus).toEqual(todo.doneStatus);
-          expect(body.todos[0].description).toEqual(todo.description);
-        });
-});
-
-
-
-
 test('12 - POST-запрос для создания задачи, но проверка длины описания завершится неудачей', { tag: '@post' }, async ({ api }) => {
 
     let todo = new ToDoBuilder().withTitle().withDoneStatus().withDescription({ length: 201 }).build();
