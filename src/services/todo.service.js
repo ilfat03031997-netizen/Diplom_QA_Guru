@@ -25,8 +25,10 @@ export class TodoService {
                 }
             });
             const statuscode = await response.status();
+            const headers = await response.headers();
 
-            return { statuscode };
+
+            return { statuscode, headers };
         })
     }
 

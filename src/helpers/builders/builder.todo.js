@@ -25,7 +25,7 @@ export class ToDoBuilder {
     }
     build() {
         const result = structuredClone(this);
-        return this;
+        return result;
     }
     // Новый метод – возвращает XML-строку
     buildXML() {

@@ -11,6 +11,7 @@ export class EditUserPage {
         this.SettingsBut = page.getByText('Settings', { exact: true });
         this.Shortbio = page.getByRole('textbox', { name: 'Short bio about you' });
         this.UpdateSettingsB = page.getByRole('button', { name: 'Update Settings' });
+        this.ProfileBio = page.locator('.user-info p');
     }
 
 
@@ -29,7 +30,7 @@ export class EditUserPage {
     }
 
     GetBio() {
-        return this.Shortbio;
+        return this.ProfileBio;
     }
 
 }

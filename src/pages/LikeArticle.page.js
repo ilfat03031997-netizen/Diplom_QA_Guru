@@ -9,7 +9,7 @@ export class LikeArticlePage {
         this.buttonLike = page.getByText('( 0 )', { exact: true });
 
 
-        this.getLike = page.getByText('( 1 )', { exact: true });
+        this.getLike = page.locator('button:has(.ion-heart)');
     }
 
     // Бизнес-сценарии на страничке

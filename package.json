@@ -10,12 +10,13 @@
     "report": "npx playwright show-report",
     "ui": "npx playwright test --ui",
     "allureG": "npx allure generate",
-    "allureO": "npx allure open"
+    "allureO": "npx allure open",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",

@@ -4,7 +4,7 @@ import { test } from '@playwright/test';
 
 
 
-export class heartbeatService {
+export class HeartBeatService {
     constructor(request) {
         // это браузер
         this.request = request;

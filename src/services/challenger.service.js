@@ -20,7 +20,7 @@ export class ChallengerService {
                 }
             });
             const headers = await response.headers();
-            console.log(`https://apichallenges.eviltester.com${headers.location}`)
+           
             return headers;
         });
 
