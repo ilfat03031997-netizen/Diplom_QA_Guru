@@ -4,11 +4,7 @@ import { ToDoBuilder } from '../src/helpers/builders/index';
 
 
 
-
-let headers
-let body
 let token
-let statuscode
 
 test.beforeAll('01 - создание новой сессии участника', async ({ api }) => {
 
