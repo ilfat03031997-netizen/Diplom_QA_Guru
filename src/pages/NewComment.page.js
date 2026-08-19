@@ -6,7 +6,7 @@ export class NewCommentPage {
         // здесь мы описываем техническую реализацию страницы
         // здесь все про элементы
         this.inputDropdownUser = page.locator('div.nav-link.dropdown-toggle.cursor-pointer');
-        this.Profileyou = page.getByRole('link', { name: 'Profile' });
+        this.Profileyou = page.locator('a.dropdown-item:has-text("Profile")');
         this.AllArt = page.getByRole('link', { name: 'My Articles' });
         this.Readmore = page.locator('span').filter({ hasText: 'Read more...' }).first();
 

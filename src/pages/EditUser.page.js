@@ -11,15 +11,14 @@ export class EditUserPage {
         this.SettingsBut = page.getByText('Settings', { exact: true });
         this.Shortbio = page.getByRole('textbox', { name: 'Short bio about you' });
         this.UpdateSettingsB = page.getByRole('button', { name: 'Update Settings' });
-        this.Profilebio = page.locator('.user-info p');
+        this.ShortbioUpdate = page.locator('[name="bio"]');
     }
 
 
     // Бизнес-сценарии на страничке
-    async EditSettings(testEditUser) {
+    async EditSettings(EditUser) {
         return test.step('Редактирование данных юзера', async () => {
 
-        const { EditUser } = testEditUser;
 
         await this.UserDropdown.click();
         await this.SettingsBut.click();
@@ -30,9 +29,9 @@ export class EditUserPage {
         });
     }
 
-
-    ProfileBio() {
-        return this.Profilebio;
+    GetBio() {
+    return this.ShortbioUpdate;
     }
+
 
 }
