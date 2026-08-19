@@ -11,7 +11,7 @@ export class EditUserPage {
         this.SettingsBut = page.getByText('Settings', { exact: true });
         this.Shortbio = page.getByRole('textbox', { name: 'Short bio about you' });
         this.UpdateSettingsB = page.getByRole('button', { name: 'Update Settings' });
-        this.ProfileBio = page.locator('.user-info p');
+        this.Profilebio = page.locator('.user-info p');
     }
 
 
@@ -24,13 +24,15 @@ export class EditUserPage {
         await this.UserDropdown.click();
         await this.SettingsBut.click();
         await this.Shortbio.click();
+        await this.Shortbio.clear(); // Явная очистка поля
         await this.Shortbio.fill(EditUser);
         await this.UpdateSettingsB.click();
         });
     }
 
-    GetBio() {
-        return this.ProfileBio;
+
+    ProfileBio() {
+        return this.Profilebio;
     }
 
 }

@@ -1,4 +1,4 @@
-/*import { test } from '../src/helpers/fixtures/index';
+import { test } from '../src/helpers/fixtures/index';
 import { expect } from '@playwright/test';
 import { ToDoBuilder } from '../src/helpers/builders/index';
 
@@ -57,7 +57,7 @@ test('13 - POST-запрос для создания задачи с указа�
 
 test('04 - получение ошибки 404 списка заданий', { tag: '@get' }, async ({ api }) => {
 
-    const Accept = '*//**';
+    const Accept = '*/*';
     ({ statuscode, headers } = await api.todo.get(token,Accept));
 
     expect(statuscode).toEqual(404);
@@ -75,9 +75,4 @@ test('06 - получение списка конкретного задания
     expect(headers['x-challenger']).toEqual(token);
 });
 
-
-
-
-
-*/
 

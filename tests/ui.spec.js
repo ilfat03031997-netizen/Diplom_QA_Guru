@@ -77,11 +77,12 @@ test.describe('Авторизация', () => {
     //1.редактирование карточки пользователя
     await app.editUser.EditSettings(testEditUser);
 
+
     //2.Перейти в профиль пользователя (ко всем статьям)
     await app.newComment.myAllArticle();
 
     // Ожидаемый результат
-    await expect(app.editUser.GetBio()).toContainText(testEditUser.EditUser);
+    await expect(app.editUser.ProfileBio()).toContainText(testEditUser.EditUser);
     });
 
     // тест 5 - Получение ошибки при регистрации с существующим email

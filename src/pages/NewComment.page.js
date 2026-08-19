@@ -6,7 +6,7 @@ export class NewCommentPage {
         // здесь мы описываем техническую реализацию страницы
         // здесь все про элементы
         this.inputDropdownUser = page.locator('div.nav-link.dropdown-toggle.cursor-pointer');
-        this.Profileyou = page.getByText('Profile', { exact: true });
+        this.Profileyou = page.getByRole('link', { name: 'Profile' });
         this.AllArt = page.getByRole('link', { name: 'My Articles' });
         this.Readmore = page.locator('span').filter({ hasText: 'Read more...' }).first();
 
@@ -29,12 +29,12 @@ export class NewCommentPage {
             await this.Readmore.click();
         });
     }
-   
+
     async addComment(testComment) {
         return test.step('Добавить новый коммент', async () => {
         const { comment } = testComment;
 
-        
+
         await this.writeComment.click();
         await this.writeComment.fill(comment);
         await this.PostComment.click();

@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 export class EditUserBuilder {
-    EdUser() {
-        this.EditUser = faker.lorem.words(10);
+    EdUser(options = { length: 5 }) {
+        this.EditUser = faker.string.alpha({ length: options.length });
         return this;
     }
     build() {
