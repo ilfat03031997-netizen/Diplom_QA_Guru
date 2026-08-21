@@ -59,30 +59,27 @@ Diplom_QA_Guru/
 ├── src/
 │ ├── helpers/
 │ │ ├── builders/ # Builder Pattern (генерация данных)
-│ │ ├── fixtures/ # Кастомные фикстуры Playwright
-│ │ └── parsers/ # Парсеры для обработки данных
+│ │  ── fixtures/ # Кастомные фикстуры Playwright
 │ ├── pages/ # Page Objects для UI-тестов
 │ │ ├── Authorization.page.js
 │ │ ├── EditArticle.page.js
 │ │ ├── EditUser.page.js
 │ │ ├── LikeArticle.page.js
 │ │ ├── Main.page.js
-│ │ ├── NewComment.page.js
+│ │ ├── AllArticle.page.page.js
 │ │ ├── PostArticle.page.js
 │ │ ├── Register.page.js
-│ │ └── Yourfeed.page.js
+│ │ 
 │ └── services/ # API-клиенты и обертки
 │ ├── api.js
 │ ├── challenger.service.js
 │ ├── challenges.service.js
-│ ├── heartbeat.service.js
 │ ├── index.js
-│ ├── secret.token.service.js
 │ ├── todo.service.js
 │ └── todos.service.js
 ├── tests/
-│ ├── api.spec.js # API-тесты
-│ └── ui.spec.js # UI-тесты
+│ ├── api # API-тесты
+│ └── ui # UI-тесты
 ├── .env.example # Пример переменных окружения
 ├── .gitignore
 ├── .prettierrc
