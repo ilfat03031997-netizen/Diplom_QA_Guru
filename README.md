@@ -50,6 +50,7 @@
 ---
 
 ## 📁 Структура проекта
+```
 Diplom_QA_Guru/
 ├── .github/
 │ └── workflows/
@@ -90,7 +91,7 @@ Diplom_QA_Guru/
 ├── package.json
 ├── playwright.config.js
 └── README.md
-
+```
 
 ---
 
