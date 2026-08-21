@@ -26,16 +26,16 @@ export class newArticlePage {
 
     async newArticlewrite(testArticle) {
          return test.step('Создание новой статьи', async () => {
-        const { title, about, YourArticle, Entertags } = testArticle;
+        const { title, about, body, tags } = testArticle;
 
         await this.ArticleTitleinp.click();
         await this.ArticleTitleinp.fill(title);
         await this.WhatisArtAboutinp.click();
         await this.WhatisArtAboutinp.fill(about);
         await this.ArticleYourinput.click();
-        await this.ArticleYourinput.fill(YourArticle);
+        await this.ArticleYourinput.fill(body);
         await this.EnterTagsinput.click();
-        await this.EnterTagsinput.fill(Entertags);
+        await this.EnterTagsinput.fill(tags);
 
         await this.PublishBut.click();
         });

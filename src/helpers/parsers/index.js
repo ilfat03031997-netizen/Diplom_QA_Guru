@@ -1,1 +1,1 @@
-import { parseResponse } from '../helpers/parsers/parser.response.js';
+export { parseResponse } from './parser.response.js';

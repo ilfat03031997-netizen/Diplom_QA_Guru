@@ -34,7 +34,12 @@ test.describe('Авторизация', () => {
     await app.NewArticle.newArticlewrite(testArticle);
 
     // Ожидаемый результат
-    await expect(app.newPostArticle.getInputComment()).toContainText(testArticle.title);
+    await expect(app.newPostArticle.getTitleArt()).toContainText(testArticle.title);
+    await expect(app.newPostArticle.getArticleBody()).toContainText(testArticle.body);
+    await expect(app.newPostArticle.getArticleTag()).toContainText(testArticle.tags);
+
+    await app.newComment.myAllArticle();
+    await expect(app.newPostArticle.getPreviewAbout()).toContainText(testArticle.about);
     });
 
      //тест 2 - Поставить лайк новой статье
@@ -44,7 +49,9 @@ test.describe('Авторизация', () => {
     //1.Создание статьи
     await app.NewArticle.clickNewArticle();
     await app.NewArticle.newArticlewrite(testArticle);
-    await expect(app.newPostArticle.getInputComment()).toContainText(testArticle.title);
+    await expect(app.newPostArticle.getTitleArt()).toContainText(testArticle.title);
+    await expect(app.newPostArticle.getArticleBody()).toContainText(testArticle.body);
+    await expect(app.newPostArticle.getArticleTag()).toContainText(testArticle.tags);
 
     //2.Перейти ко всем статьям
     await app.newComment.myAllArticle();
@@ -61,7 +68,9 @@ test.describe('Авторизация', () => {
     //1.Создание статьи
     await app.NewArticle.clickNewArticle();
     await app.NewArticle.newArticlewrite(testArticle);
-    await expect(app.newPostArticle.getInputComment()).toContainText(testArticle.title);
+    await expect(app.newPostArticle.getTitleArt()).toContainText(testArticle.title);
+    await expect(app.newPostArticle.getArticleBody()).toContainText(testArticle.body);
+    await expect(app.newPostArticle.getArticleTag()).toContainText(testArticle.tags);
 
     //2.Редактирование статьи
     await app.newComment.myAllArticle();

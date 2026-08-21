@@ -51,6 +51,7 @@ test('13 - POST-запрос для создания задачи с указа�
     expect(body.title).toEqual(todo.title);
     expect(headers['x-challenger']).toEqual(token);
     expect(body.description).toEqual(todo.description);
+    expect(body.doneStatus).toEqual(todo.doneStatus)
 });
 
 test('04 - получение ошибки 404 списка заданий', { tag: '@get' }, async ({ api }) => {

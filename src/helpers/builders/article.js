@@ -10,11 +10,11 @@ export class ArticleBuilder {
     }
 
     YourArticle() {
-        this.YourArticle = faker.lorem.paragraphs(3);
+        this.body = faker.lorem.paragraphs(3);
         return this;
     }
     Entertags() {
-        this.Entertags = faker.lorem.words(1);
+        this.tags = faker.lorem.words(1);
         return this;
     }
     build() {

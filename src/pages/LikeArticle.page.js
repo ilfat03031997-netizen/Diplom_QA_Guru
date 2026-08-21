@@ -15,7 +15,7 @@ export class LikeArticlePage {
     // Бизнес-сценарии на страничке
     async addLike() {
         return test.step('Поставить лайк', async () => {
-        await this.buttonLike.first().click();
+        await this.buttonLike.click();
         });
     }
 
