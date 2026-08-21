@@ -91,7 +91,6 @@ Diplom_QA_Guru/
 ├── playwright.config.js
 └── README.md
 
-text
 
 ---
 
@@ -121,18 +120,18 @@ npx playwright install --with-deps
 
 ### 3️⃣ Настройка переменных окружения
 ```bash
-Скопируйте файл примера и заполните своими данными:
+#Скопируйте файл примера и заполните своими данными:
 
-bash
 cp .env.example .env
-Откройте .env и укажите URL-адреса:
 
-text
-UI_URL=https://realworld.qa.guru
-API_URL=https://apichallenges.eviltester.com
-Для интеграции с Allure TestOps и Telegram укажите:
 
-text
+#Откройте .env и укажите URL-адреса:
+
+BACK_URL=https://realworld.qa.guru
+BACK_URL_API=https://apichallenges.eviltester.com
+
+#Для интеграции с Allure TestOps и Telegram укажите:
+
 ALLURE_TOKEN=ваш_токен
 ALLURE_PROJECT_ID=5342
 TELEGRAM_CHAT_ID=ваш_chat_id
@@ -141,19 +140,22 @@ TELEGRAM_BOT_TOKEN=ваш_токен_бота
 ```
 4️⃣ Запуск тестов
 ```bash
-Команда	Описание
-npm t	Запуск всех тестов (UI + API)
-npm run test:ui	Только UI-тесты
-npm run test:api	Только API-тесты
-npm run test:headed	UI-тесты с открытым браузером
-npm run test:debug	Режим отладки (пошагово)
+Команда	                     Описание                     
+npm t	             Запуск всех тестов (UI + API)       
+npm test	         Запуск всех тестов (UI + API)       
+npm run ui	       Запуск тестов в интерактивном UI-режиме Playwright
+npm run report	   Открыть HTML-отчёт Playwright в браузере
+npm run allureG	   Сгенерировать Allure-отчёт из результатов (allure-results)
+npm run allureO	   Открыть сгенерированный Allure-отчёт в браузере
+npm run codegen	   Запустить генератор кода Playwright (record & generate)
+npm run lint	     Проверить код с помощью ESLint
 ```
 5️⃣ Просмотр отчетов
 ```bash
-Команда	Описание
-npm run report	Открыть HTML-отчет Playwright
-npm run allure:generate	Сгенерировать отчет Allure
-npm run allure:open	Открыть Allure в браузере
+Команда	                     Описание
+npm run report	    Открыть HTML-отчет Playwright
+npm run allureG	    Сгенерировать отчет Allure
+npm run allureO	    Открыть Allure в браузере
 ```
 
 🔄 Запуск в CI/CD
