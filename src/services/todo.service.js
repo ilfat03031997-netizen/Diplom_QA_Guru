@@ -18,7 +18,7 @@ export class TodoService {
         return test.step('get/todo', async () => {
 
 
-            let response = await this.request.get(`${process.env.BACK_URL_API}/todo`, {
+            let response = await this.request.get(`/todo`, {
                 headers: {
                     'x-challenger': token,
                     'Accept': Accept

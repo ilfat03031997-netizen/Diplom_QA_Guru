@@ -15,7 +15,7 @@ export class ChallengesService {
         return test.step('get/challenges', async () => {
 
 
-            let response = await this.request.get(`${process.env.BACK_URL_API}/challenges`, {
+            let response = await this.request.get(`/challenges`, {
                 headers: {
                     'x-challenger': token,
                     'Accept': Accept

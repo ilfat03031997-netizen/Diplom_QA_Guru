@@ -6,7 +6,7 @@ export class LikeArticlePage {
         this.page = page;
         // здесь мы описываем техническую реализацию страницы
         // здесь все про элементы
-        this.buttonLike = page.getByText('( 0 )', { exact: true });
+        this.buttonLike = page.locator('button:has(.ion-heart)');
 
 
         this.getLike = page.locator('button:has(.ion-heart)');
@@ -18,6 +18,13 @@ export class LikeArticlePage {
         await this.buttonLike.click();
         });
     }
+
+
+    async getLikeCount() {
+    const text = await this.buttonLike.innerText();
+    const match = text.match(/\d+/);
+    return match ? Number(match[0]) : 0;
+}
 
     GetLike() {
         return this.getLike;

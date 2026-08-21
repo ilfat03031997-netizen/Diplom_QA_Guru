@@ -12,15 +12,7 @@ if (!process.env.CI) {
   dotenv.config({ path: path.resolve(__dirname, '.env') });
 }
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
 
-
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -35,56 +27,32 @@ export default defineConfig({
   reporter: [['html',], ['line',], ['allure-playwright',],],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: process.env.BACK_URL,
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    screenshot: 'only-on-failure',
     trace: 'on-first-retry',
-    screenshot: 'on'
+    navigationTimeout: 60_000,
+    actionTimeout: 15_000,
   },
+   
 
-  /* Configure projects for major browsers */
-  projects: [
+
+    // UI и API
+    projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      name: 'UI',
+      testDir: './tests/ui',
+      use: {
+        ...devices['Desktop Chrome'],
+        // baseURL будет  для page.goto('/')
+        baseURL: process.env.BACK_URL || 'https://realworld.qa.guru/',
+      },
     },
-
-/*
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'API',
+      testDir: './tests/api',
+      use: {
+        //  baseURL  для request.get('/')
+        baseURL: process.env.BACK_URL_API || 'https://apichallenges.eviltester.com/',
+      },
     },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-    */
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
-
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });

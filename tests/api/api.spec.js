@@ -1,6 +1,6 @@
-import { test } from '../src/helpers/fixtures/index';
+import { test } from '../../src/helpers/fixtures/index';
 import { expect } from '@playwright/test';
-import { ToDoBuilder } from '../src/helpers/builders/index';
+import { ToDoBuilder } from '../../src/helpers/builders/index';
 
 
 
@@ -13,7 +13,6 @@ test.beforeAll('01 - создание новой сессии участника
     const headers = await api.challenger.post(Accept);
 
     token = headers['x-challenger'];
-
 
 });
 

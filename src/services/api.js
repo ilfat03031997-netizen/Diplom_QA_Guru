@@ -1,4 +1,4 @@
-import { ChallengerService, ChallengesService, TodosService, TodoService, HeartBeatService, SecretTokenService } from './index';
+import { ChallengerService, ChallengesService, TodosService, TodoService } from './index';
 
 //Фасад
 
@@ -10,8 +10,6 @@ export class Api {
         this.challenges = new ChallengesService(request);
         this.todos = new TodosService(request);
         this.todo = new TodoService(request);
-        this.heartbeat = new HeartBeatService(request)
-        this.secrettoken = new SecretTokenService(request)
     }
 
 }

@@ -14,13 +14,13 @@ export class ChallengerService {
     // Бизнес-сценарии для эндпоинта
     async post(Accept) {
         return test.step('post/challenger', async () => {
-            let response = await this.request.post(`${process.env.BACK_URL_API}/challenger`, {
+            let response = await this.request.post(`/challenger`, {
                 headers: {
                     'Accept': Accept
                 }
             });
             const headers = await response.headers();
-           
+
             return headers;
         });
 

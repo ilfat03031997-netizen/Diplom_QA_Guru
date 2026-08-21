@@ -4,7 +4,7 @@ export * from './EditUser.page';
 export * from './LikeArticle.page';
 export * from './Main.page';
 export * from './newArticle.page';
-export * from './NewComment.page';
+export * from './AllArticle.page';
 export * from './PostArticle.page';
 export * from './Register.page';
-export * from './Yourfeed.page';
+

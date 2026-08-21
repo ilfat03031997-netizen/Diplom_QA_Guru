@@ -1,6 +1,6 @@
-import { test } from '../src/helpers/fixtures/index';
+import { test } from '../../src/helpers/fixtures/index';
 import { expect } from '@playwright/test';
-import {UserBuilder,EditArticleBuilder,ArticleBuilder,EditUserBuilder} from '../src/helpers/builders';
+import {UserBuilder,EditArticleBuilder,ArticleBuilder,EditUserBuilder} from '../../src/helpers/builders';
 
 test.describe('Авторизация', () => {
   let testUser;
@@ -38,7 +38,7 @@ test.describe('Авторизация', () => {
     await expect(app.newPostArticle.getArticleBody()).toContainText(testArticle.body);
     await expect(app.newPostArticle.getArticleTag()).toContainText(testArticle.tags);
 
-    await app.newComment.myAllArticle();
+    await app.allArticle.myAllArticle();
     await expect(app.newPostArticle.getPreviewAbout()).toContainText(testArticle.about);
     });
 
@@ -54,12 +54,14 @@ test.describe('Авторизация', () => {
     await expect(app.newPostArticle.getArticleTag()).toContainText(testArticle.tags);
 
     //2.Перейти ко всем статьям
-    await app.newComment.myAllArticle();
+    await app.allArticle.myAllArticle();
     //3.Поставить лайк статье
+    const likesBefore = await app.newLike.getLikeCount();
     await app.newLike.addLike();
 
     // Ожидаемый результат
-    await expect(app.newLike.GetLike()).not.toContainText('0');
+    await expect.poll(() => app.newLike.getLikeCount()).toBe(likesBefore + 1);
+
     });
 
     //тест 3 - редактирование статьи
@@ -73,7 +75,7 @@ test.describe('Авторизация', () => {
     await expect(app.newPostArticle.getArticleTag()).toContainText(testArticle.tags);
 
     //2.Редактирование статьи
-    await app.newComment.myAllArticle();
+    await app.allArticle.myAllArticle();
     await app.editArticle.EditArticle(EditArt);
 
     // Ожидаемый результат
@@ -82,13 +84,21 @@ test.describe('Авторизация', () => {
 
     // тест 4 - Автоизованный пользователь может редактировать свои данные
     test('Пользователь может редактировать свои данные ', async ({ app }) => {
+       testEditUser = new EditUserBuilder().EdUser().build();
 
       //1.редактирование карточки пользователя
       await app.editUser.EditSettings(testEditUser.EditUser);
 
+
+      //2.переходим снова на страницу настроек
+      await app.editUser.mySettings();
+
       // Ожидаемый результат
       await expect(app.editUser.GetBio()).toContainText(testEditUser.EditUser);
     });
+
+
+
 
     // тест 5 - Получение ошибки при регистрации с существующим email
     test('Получение ошибки при регистрации с существующим email', async ({app}) => {

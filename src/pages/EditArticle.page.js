@@ -32,6 +32,6 @@ export class EditArticlePage {
   GetArticleE(expectedText) {
 
     return this.page.getByText(expectedText, { exact: true });
-    
+
   }
 }

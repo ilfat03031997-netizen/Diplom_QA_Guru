@@ -24,10 +24,6 @@ export class PostArticlePage {
         return this.MyArticle;
     }
 
-    getALlArticle() {
-        return this.getallArt;
-    }
-
     getArticleBody() {
     return this.yourArt;
     }

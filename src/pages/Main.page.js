@@ -41,5 +41,5 @@ export class MainPage {
     getError() {
     return this.errorMessages;
     }
-
+ 
 }
